@@ -2,11 +2,11 @@
 from RobotType import *
 
 class Vertex:
-    def __init__(self, key, pos, radious, theta_step, type):
+    def __init__(self, key, pos, kick_end, radious, type):
         self.id = key
         self.robot_pos = pos
+        self.kick_end = kick_end
         self.radious = radious
-        self.theta_step = theta_step
         self.type = type
         self.connectedTo = []
 

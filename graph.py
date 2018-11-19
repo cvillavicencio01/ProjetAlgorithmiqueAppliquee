@@ -4,17 +4,14 @@ from vertex import *
 class Graph:
 
     def __init__(self, problem):
+        self.problem = problem
         self.vertList = []
         self.numVertices = 0
-        self.buildGraphForOpponents(problem)
+        self.buildGraphForOpponents()
 
 
-    def buildGraphForOpponents(self,problem):
-        inc = 1
-        for opp_id in range(problem.getNbOpponents()):
-            opponent = Vertex("v"+str(inc), problem.getOpponent(opp_id), problem.robot_radius, problem.theta_step, RobotType.Attack)
-            self.addVertex(opponent)
-            inc += 1
+    def buildGraphForOpponents(self):
+        self.createKicks()
 
     def addVertex(self,v):
         self.numVertices = self.numVertices + 1
@@ -39,8 +36,25 @@ class Graph:
     def __iter__(self):
         return iter(self.vertList.values())
 
-    def existDominant(self,opponnents):
-        for o in opponnents:
-            if len(o.connectedTo) == 0:
-                return False
-        return True
+    def createKicks(self):
+        for opp_id in range(self.problem.getNbOpponents()):
+            kick_dir = 0
+            while kick_dir < 2 * math.pi:
+                self.createKick(self.problem.getOpponent(opp_id), kick_dir)
+                kick_dir += self.problem.theta_step
+
+    def createKick(self, robot_pos, kick_dir):
+        # Getting closest goal to score
+        kick_end = None
+        best_dist = None
+        for goal in self.problem.goals:
+            kick_result = goal.kickResult(robot_pos, kick_dir)
+            if not kick_result is None:
+                goal_dist = numpy.linalg.norm(robot_pos - kick_result)
+                if best_dist == None or goal_dist < best_dist:
+                    best_dist = goal_dist
+                    kick_end = kick_result
+        if not kick_end is None:
+            vertex = Vertex("v"+str(self.numVertices), robot_pos, kick_end, self.problem.robot_radius, RobotType.Attack)
+            self.addVertex(vertex)
+            #print('Pi= %s, \tPf= %s' % (str(robot_pos),str(kick_end)))
