@@ -1,11 +1,20 @@
-
+from problem import *
 from vertex import *
 
 class Graph:
 
-    def __init__(self):
+    def __init__(self, problem):
         self.vertList = []
         self.numVertices = 0
+        self.buildGraphForOpponents(problem)
+
+
+    def buildGraphForOpponents(self,problem):
+        inc = 1
+        for opp_id in range(problem.getNbOpponents()):
+            opponent = Vertex("v"+str(inc), problem.getOpponent(opp_id), problem.robot_radius, problem.theta_step, RobotType.Attack)
+            self.addVertex(opponent)
+            inc += 1
 
     def addVertex(self,v):
         self.numVertices = self.numVertices + 1

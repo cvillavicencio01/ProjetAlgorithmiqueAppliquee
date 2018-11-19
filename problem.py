@@ -3,7 +3,7 @@ import sys
 
 from goal import *
 
-class Problem:       
+class Problem:
     def __init__(self, data):
         # Checking cont
         mandatory_keys = ["field_limits", "robot_radius", "opponents", "theta_step", "pos_step", "goals"]
@@ -30,7 +30,7 @@ class Problem:
         # Reading other parameters
         self.robot_radius = data["robot_radius"]
         self.theta_step = data["theta_step"]
-        self.pos_step = data["pos_step"]
+        #self.pos_step = data["pos_step"]
 
     """ Return the position of the center of the field """
     def getFieldCenter(self):

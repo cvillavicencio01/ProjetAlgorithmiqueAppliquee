@@ -2,9 +2,11 @@
 from RobotType import *
 
 class Vertex:
-    def __init__(self,key,pos, type):
+    def __init__(self, key, pos, radious, theta_step, type):
         self.id = key
         self.robot_pos = pos
+        self.radious = radious
+        self.theta_step = theta_step
         self.type = type
         self.connectedTo = []
 
@@ -23,5 +25,8 @@ class Vertex:
     def setType(self, type):
         self.type = type
 
-    def getId(self, ):
+    def getId(self):
         return self.id
+
+    def getPosition(self):
+        return self.robot_pos
