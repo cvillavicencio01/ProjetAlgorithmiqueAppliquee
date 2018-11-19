@@ -30,3 +30,6 @@ class Vertex:
 
     def getPosition(self):
         return self.robot_pos
+
+    def getKickEnd(self):
+        return self.kick_end
