@@ -58,3 +58,16 @@ class Graph:
             vertex = Vertex("v"+str(self.numVertices), robot_pos, kick_end, self.problem.robot_radius, RobotType.Attack)
             self.addVertex(vertex)
             #print('Pi= %s, \tPf= %s' % (str(robot_pos),str(kick_end)))
+
+    def createDefense(self):
+        x = -self.problem.getFieldWidth()/2
+        y = -self.problem.getFieldHeight()/2
+
+        while x<self.problem.getFieldWidth()/2-0.2:
+            x+=0.2
+            while y<self.problem.getFieldHeight()/2-0.2:
+                y+=0.2
+                v = Vertex('f', [round(x,1),round(y,1)], [0,0], 0.5, RobotType.Defense)
+                self.addVertex(v)
+                print(round(x,1),round(y,1))
+            y=-self.problem.getFieldHeight()/2

@@ -67,7 +67,7 @@ class Board :
             if intercepted:
                 color = self.success_color #verd
             self.drawSegmentInField(screen, color, robot_pos, kick_end, 1)
-    
+
     def drawKickRays(self, screen):
         for opp_id in range(self.problem.getNbOpponents()):
             kick_dir = 0

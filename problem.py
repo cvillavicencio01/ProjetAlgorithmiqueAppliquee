@@ -30,7 +30,7 @@ class Problem:
         # Reading other parameters
         self.robot_radius = data["robot_radius"]
         self.theta_step = data["theta_step"]
-        #self.pos_step = data["pos_step"]
+        self.pos_step = data["pos_step"]
 
     """ Return the position of the center of the field """
     def getFieldCenter(self):
