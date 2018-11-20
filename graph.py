@@ -8,6 +8,8 @@ class Graph:
         self.vertList = []
         self.numVertices = 0
         self.buildGraphForOpponents()
+        self.createDefense()
+        self.createEdges()
 
 
     def buildGraphForOpponents(self):
@@ -55,7 +57,7 @@ class Graph:
                     best_dist = goal_dist
                     kick_end = kick_result
         if not kick_end is None:
-            vertex = Vertex("v"+str(self.numVertices), robot_pos, kick_end, self.problem.robot_radius, RobotType.Attack)
+            vertex = Vertex("%s [%s], [%s]"%(str(self.numVertices),str(robot_pos),str(kick_end)), robot_pos, kick_end, self.problem.robot_radius, RobotType.Attack)
             self.addVertex(vertex)
             #print('Pi= %s, \tPf= %s' % (str(robot_pos),str(kick_end)))
 
@@ -67,7 +69,20 @@ class Graph:
             x+=0.2
             while y<self.problem.getFieldHeight()/2-0.2:
                 y+=0.2
-                v = Vertex('f', [round(x,1),round(y,1)], [0,0], 0.5, RobotType.Defense)
+                v = Vertex(str([round(x,1),round(y,1)]), [round(x,1),round(y,1)], [0,0], self.problem.robot_radius, RobotType.Defense)
                 self.addVertex(v)
-                print(round(x,1),round(y,1))
+                #print(round(x,1),round(y,1))
             y=-self.problem.getFieldHeight()/2
+
+    def createEdges(self):
+        attack = list(filter(lambda x: x.getType() == RobotType.Attack, self.getVertices()))
+        defense = list(filter(lambda x: x.getType() == RobotType.Defense, self.getVertices()))
+
+        for d in defense:
+            for a in attack:
+                collide_point = segmentCircleIntersection(a.getPosition(), a.getKickEnd(), d.getPosition(), self.problem.robot_radius)
+                if not collide_point is None:
+                    self.addEdge(a,d)
+
+        for a in attack:
+            print(a)

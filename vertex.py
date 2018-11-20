@@ -25,6 +25,9 @@ class Vertex:
     def setType(self, type):
         self.type = type
 
+    def getType(self):
+        return self.type
+
     def getId(self):
         return self.id
 

@@ -20,7 +20,6 @@ with open(solution_path) as solution_file:
 
 G = Graph(problem)
 
-G.createDefense()
 
 #for l in range(-4.5,4.5,0.2):
 #    for h in range (-3,3,0.2):
