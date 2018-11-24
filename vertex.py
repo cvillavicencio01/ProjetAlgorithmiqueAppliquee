@@ -2,11 +2,11 @@
 from RobotType import *
 
 class Vertex:
-    def __init__(self, key, pos, kick_end, radious, type):
-        self.id = key
+    def __init__(self, id, pos, kick_dir, radius, type):
+        self.id = id
         self.robot_pos = pos
-        self.kick_end = kick_end
-        self.radious = radious
+        self.kick_dir = kick_dir
+        self.radius = radius
         self.type = type
         self.connectedTo = []
 
@@ -18,9 +18,6 @@ class Vertex:
 
     def getConnections(self):
         return self.connectedTo()
-
-    def getRobotPosition(self):
-        return self.robot_pos
 
     def setType(self, type):
         self.type = type
@@ -34,5 +31,8 @@ class Vertex:
     def getPosition(self):
         return self.robot_pos
 
-    def getKickEnd(self):
-        return self.kick_end
+    def getKickDirection(self):
+        return self.kick_dir
+
+    def getRadius(self):
+        return self.radius
