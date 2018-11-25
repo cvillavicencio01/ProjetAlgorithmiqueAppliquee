@@ -15,12 +15,6 @@ class Graph:
         self.numVertices = self.numVertices + 1
         self.vertList.append(v)
 
-    #def getVertex(self,n):
-    #    if n in self.vertList:
-    #        return self.vertList[n]
-    #    else:
-    #        return None
-
     def __contains__(self,n):
         return n in self.vertList
 
@@ -30,6 +24,12 @@ class Graph:
 
     def getVertices(self):
         return self.vertList
+
+    def getAttackers(self):
+        return list(filter(lambda x: x.getType() == RobotType.Attack, self.getVertices()))
+
+    def getDefense(self):
+        return list(filter(lambda x: x.getType() == RobotType.Defense, self.getVertices()))
 
     def __iter__(self):
         return iter(self.vertList.values())

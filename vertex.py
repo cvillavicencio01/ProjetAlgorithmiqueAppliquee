@@ -13,11 +13,18 @@ class Vertex:
     def addNeighbor(self,v):
         self.connectedTo.append(v)
 
+    def removeNeighbor(self,v):
+        if v in self.connectedTo:
+            self.connectedTo.remove(v)
+
+    def removeAllNeighbors(self):
+        self.connectedTo.clear()
+
     def __str__(self):
         return str(self.id) + ' connectedTo: ' + str([x.id for x in self.connectedTo])
 
     def getConnections(self):
-        return self.connectedTo()
+        return self.connectedTo
 
     def setType(self, type):
         self.type = type
