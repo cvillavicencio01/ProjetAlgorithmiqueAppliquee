@@ -9,7 +9,7 @@ class Board :
     def __init__(self, problem, solution):
         self.problem = problem
         self.solution = solution
-        self.size = numpy.array([1280,960])
+        self.size = numpy.array([1280,800])
         self.goal_thickness = 5
         # colors
         self.background_color = (0,0,0)
