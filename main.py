@@ -47,6 +47,6 @@ if mode=="-g":
     b.run()
 
 if mode=="-p":
-    print("--- %s seconds ---" % (time.time() - start_time))
+    print("-- %s seconds --" % (time.time() - start_time))
 
 sys.exit()
