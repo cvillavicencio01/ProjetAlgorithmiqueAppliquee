@@ -8,13 +8,10 @@ from board import *
 from test import *
 from greedy import *
 
-if len(sys.argv)<3:
-    sys.exit("A problem ocurred with your arguments. Please check if they are correct and retry")
+if (len(sys.argv) < 3) :
+    sys.exit("Usage: " + sys.argv[0] + " <problem.json> <mode>")
 
 start_time = time.time()
-
-if (len(sys.argv) < 2) :
-    sys.exit("Usage: " + sys.argv[0] + " <problem.json>")
 
 problem_path = sys.argv[1]
 mode = sys.argv[2]
