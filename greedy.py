@@ -30,7 +30,7 @@ class Greedy:
                         if d in defenseList:
                             d.removeNeighbor(attack_element)
 
-                    attack_element.removeAllNeighbors()
+                    #attack_element.removeAllNeighbors()
                     if attack_element in attackersList:
                         attackersList.remove(attack_element)
         return result

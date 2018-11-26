@@ -2,15 +2,22 @@
 import pygame
 import sys
 import json
+import time
 
 from board import *
 from test import *
 from greedy import *
 
+if len(sys.argv)<3:
+    sys.exit("A problem ocurred with your arguments. Please check if they are correct and retry")
+
+start_time = time.time()
+
 if (len(sys.argv) < 2) :
     sys.exit("Usage: " + sys.argv[0] + " <problem.json>")
 
 problem_path = sys.argv[1]
+mode = sys.argv[2]
 
 #read problem
 with open(problem_path) as problem_file:
@@ -34,12 +41,15 @@ with open('configs/solution.json', 'w') as outfile:
     json.dump(data, outfile)
 
 
-#read the solution
-with open('configs/solution.json') as solution_file:
-    solution = Solution(json.load(solution_file))
-
 #display result
-b = Board(problem, solution)
-b.run()
+if mode=="-g":
+    #read the solution
+    with open('configs/solution.json') as solution_file:
+        solution = Solution(json.load(solution_file))
+    b = Board(problem, solution)
+    b.run()
+
+if mode=="-p":
+    print("--- %s seconds ---" % (time.time() - start_time))
 
 sys.exit()
