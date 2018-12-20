@@ -1,4 +1,3 @@
-
 from RobotType import *
 
 class Vertex:

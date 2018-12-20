@@ -92,6 +92,8 @@ class Board :
         self.drawRobots(screen, self.problem.opponents, self.opponent_color)
 
     def drawDefenders(self, screen):
+        if len(self.solution.defenders) == 0:
+            return
         self.drawRobots(screen, self.solution.defenders, self.defender_color)
 
     def draw(self, screen):

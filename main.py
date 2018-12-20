@@ -5,8 +5,9 @@ import json
 import time
 
 from board import *
-from test import *
 from greedy import *
+from brute_force import *
+
 
 if (len(sys.argv) < 3) :
     sys.exit("Usage: " + sys.argv[0] + " <problem.json> <mode>")
@@ -24,12 +25,15 @@ with open(problem_path) as problem_file:
 G = Graph(problem)
 
 #initialize greedy algorithm
-greedy = Greedy(G)
+brute = Greedy(G)
+#brute = BruteForce(G)
+
 
 #search best positions
 positions = []
-for v in greedy.execute():
+for v in brute.execute():
     positions.append(v.getPosition())
+
 
 #dump(save) best positions
 data = {}

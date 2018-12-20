@@ -5,32 +5,38 @@ class Greedy:
         self.graph = graph
 
     def execute(self):
-        attackersList = self.graph.getAttackers()
-        defenseList = self.graph.getDefense()
-        result = []
+        attackers_list = self.graph.getAttackers()
+        defense_list = self.graph.getDefense()
 
-        while len(attackersList) != 0:
-            defense_max = None
-            for defense in defenseList:
-                if defense_max != None:
-                    if len(defense.getConnections()) > len(defense_max.getConnections()):
-                        defense_max = defense
+        solution = []
+
+        for a in attackers_list:
+            if len(a.getConnections()) == 0 :
+                return solution
+
+        while len(attackers_list) != 0:
+            defender_max = None
+            for defender in defense_list:
+                if defender_max != None:
+                    if len(defender.getConnections()) > len(defender_max.getConnections()):
+                        defender_max = defender
                 else:
-                    defense_max = defense
-            if len(defense_max.getConnections()) == 0:
-                result
+                    defender_max = defender
+            if len(defender_max.getConnections()) == 0:
+                return solution
             else:
-                result.append(defense_max)
-                defenseList.remove(defense_max)
+                solution.append(defender_max)
+                defense_list.remove(defender_max)
 
-                for attack_element in defense_max.getConnections():
+                for attack_element in defender_max.getConnections():
                     defense_connections = attack_element.getConnections()
 
                     for d in defense_connections:
-                        if d in defenseList:
+                        if d in defense_list:
                             d.removeNeighbor(attack_element)
 
                     attack_element.removeAllNeighbors()
-                    if attack_element in attackersList:
-                        attackersList.remove(attack_element)
-        return result
+
+                    if attack_element in attackers_list:
+                        attackers_list.remove(attack_element)
+        return solution

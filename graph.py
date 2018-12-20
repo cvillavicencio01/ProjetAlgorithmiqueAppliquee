@@ -66,7 +66,7 @@ class Graph:
         for d in defense:
             for a in attack:
                 collide_point = segmentCircleIntersection(a.getPosition(), self.getKickEnd(a.getPosition(),a.getKickDirection()), d.getPosition(), d.getRadius())
-                if not collide_point is None:
+                if not self.playersColliding(a.getPosition(),d.getPosition(),self.problem.robot_radius,self.problem.robot_radius) and not collide_point is None:
                     self.addEdge(a,d)
 
     def createDefense(self):
@@ -74,8 +74,16 @@ class Graph:
         x_end = self.problem.field_limits[0][1]
         y_start = self.problem.field_limits[1][0]
         y_end = self.problem.field_limits[1][1]
-
         for x in numpy.arange(x_start, x_end, self.problem.pos_step):
             for y in numpy.arange(y_start, y_end, self.problem.pos_step):
-                v = Vertex("Defense : %s"%(str([x,y])),[x,y], None, self.problem.robot_radius, RobotType.Defense)
-                self.addVertex(v)
+                    v = Vertex("Defense : %s"%(str([x,y])),[x,y], None, self.problem.robot_radius, RobotType.Defense)
+                    self.addVertex(v)
+
+    def playersColliding(self, player1, player2, radius1, radius2):
+        dx = player1[0] - player2[0]
+        dy = player1[1] - player2[1]
+        radii = radius1 + radius2
+        if ( ((dx * dx) + (dy * dy)) < (radii * radii) ):
+            return True
+        else:
+            return False
