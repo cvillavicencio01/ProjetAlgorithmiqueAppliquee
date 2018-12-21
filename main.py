@@ -27,10 +27,11 @@ with open(args.filename) as problem_file:
 
 #create graph
 if args.time:
-    start_time = time.time()
+    graph_time = time.time()
 G = Graph(problem)
 if args.time:
-    print("--Graph construction time: %s seconds --" % (time.time() - start_time))
+    graph_final_value = (time.time() - graph_time)
+    print("-- Graph construction time: %s seconds --" % graph_final_value)
 
 
 #initialize algorithm
@@ -45,13 +46,14 @@ else:
 positions = []
 
 if args.time:
-    start_time = time.time()
+    algo_time = time.time()
 
 for v in algo.execute():
     positions.append(v.getPosition())
 
 if args.time:
-    print("--Algorithm time: %s seconds --" % (time.time() - start_time))
+    algo_final_value = (time.time() - algo_time)
+    print("-- Algorithm time: %s seconds --" % algo_final_value)
 
 
 #dump(save) best positions
@@ -61,6 +63,11 @@ with open('configs/solution.json', 'w') as outfile:
     json.dump(data, outfile)
 
 #display result
+if args.time:
+    print("-- Total time: %s seconds --" % (algo_final_value + graph_final_value))
+
+
+
 if not args.time:
     #read the solution
     with open('configs/solution.json') as solution_file:
